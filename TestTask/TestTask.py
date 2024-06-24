@@ -20,6 +20,18 @@ def sync_fun(source, replica):
         else:
             shutil.copy2(file_path, target_path)     #file
             print(f"Copied new file {file_path} to {target_path}")
+            
+    #removed files or subdirectories
+    for file in comp.right_only:
+        file_path = os.path.join(replica, file)
+        
+        if os.path.isdir(file_path):             #subdirectory
+            shutil.rmtree(file_path)
+            print(f"Removed subdirectory {file_path}")
+        else:
+            os.remove(file_path)                #file
+            print(f"Removed file {file_path}")        
+    
         
 
 #arguments - folder paths, synchronization interval, log file path
@@ -41,10 +53,10 @@ sync_int = int(sys.argv[3])
 log_file_path = sys.argv[4]
 
 #synchronization process
-#max_num = 0
+max_num = 0
 while(True):
     sync_fun(source_path, replica_path)
-    # max_num += 1
-    # if max_num == 3:
-    #     sys.exit()
+    max_num += 1
+    if max_num == 5:
+        sys.exit()
     time.sleep(sync_int)
