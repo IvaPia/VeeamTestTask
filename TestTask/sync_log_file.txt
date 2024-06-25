@@ -1,0 +1,1 @@
+Folder synchronization between source D:\Moje dokumenty\Práca\Veeam\source and replica D:\Moje dokumenty\Práca\Veeam\replica started at 2024-06-25 11:50:58.927766
