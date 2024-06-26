@@ -50,6 +50,9 @@ def sync_fun(source, replica, log_file):
         source_subdir_path = os.path.join(source, subdir)
         target_subdir_path = os.path.join(replica, subdir)
         sync_fun(source_subdir_path, target_subdir_path, log_file)  
+        
+    #flush data to log file
+    log_file.flush()
 
 #----------------------------------------------------------------------------------------------------------------
 
@@ -59,17 +62,21 @@ if len(sys.argv) != 5:
     sys.exit()
 
 source_path = sys.argv[1]
-# if not os.path.isdir(source_path):
-#     print("The source folder does not exist!")
-#     sys.exit()
+if not os.path.isdir(source_path):
+    print("The source folder does not exist!")
+    sys.exit()
 
 replica_path = sys.argv[2]
-# if not os.path.isdir(replica_path):
-#     print("The replica folder does not exist!")
-#     sys.exit()
+if not os.path.isdir(replica_path):
+    print("The replica folder does not exist!")
+    sys.exit()
 
 sync_int = int(sys.argv[3])
+
 log_file_path = sys.argv[4]
+if not (os.path.isdir(log_file_path) and os.access(log_file_path, os.W_OK)):
+    print("The log file path does not exist!")
+    sys.exit()
 
 #create a log file
 f = open(os.path.join(log_file_path, "sync_log_file.txt"), "w")
