@@ -98,7 +98,7 @@ if not (os.path.isdir(log_file_path) and os.access(log_file_path, os.W_OK)):
 #create a log file
 f = open(os.path.join(log_file_path, "sync_log_file.txt"), "w")
 f.write(f"Folder synchronization between source {source_path} and replica {replica_path} started at {datetime.datetime.now()}\n\n")
-print(f"Folder synchronization between source {source_path} and replica {replica_path} started at {datetime.datetime.now()}\n\n")
+print(f"Folder synchronization between source {source_path} and replica {replica_path} started at {datetime.datetime.now()}\n")
 
 #synchronization process
 while(True):
